@@ -11,7 +11,12 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+from collections import Counter
 
+print("Hecho por Juan Pablo Buitrago Diaz CC 1000.206.552")
+datos = open('data.csv','r').readlines()
+datos = [y.replace("\n","") for y in datos]  
+datos = [y.split("\t") for y in datos]
 
 def pregunta_01():
     """
@@ -21,8 +26,9 @@ def pregunta_01():
     214
 
     """
-    return
+    return sum([int(x[1]) for x in datos])
 
+#print(pregunta_01())
 
 def pregunta_02():
     """
@@ -39,8 +45,9 @@ def pregunta_02():
     ]
 
     """
-    return
+    return sorted(Counter([str(x[0]) for x in datos]).most_common(5), key=lambda tupla: tupla[0])
 
+#print(pregunta_02())
 
 def pregunta_03():
     """
@@ -57,8 +64,14 @@ def pregunta_03():
     ]
 
     """
-    return
+    suma = {} 
+    for letra, numero in list(zip([x[0] for x in datos],[x[1] for x in datos])):
+        suma[letra] = suma.get(letra,0) + int(numero)
+    lista = sorted([(key,value) for key,value in suma.items()],key=lambda tupla: tupla)
 
+    return lista
+
+#print(pregunta_03())
 
 def pregunta_04():
     """
