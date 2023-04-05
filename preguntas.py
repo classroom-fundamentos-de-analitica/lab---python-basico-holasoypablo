@@ -342,4 +342,11 @@ def pregunta_12():
     }
 
     """
-    return
+    columnas = [[y[0],y[4].split(',')] for y in datos]
+    dic = {}
+    for tupla in columnas:
+        for elemento in tupla[1]:
+            dic[tupla[0]] = dic.get(tupla[0],0) + int(elemento.split(':')[1])
+    return {llave:dic[llave] for llave in sorted(dic.keys())}
+
+#print(pregunta_12())
