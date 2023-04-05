@@ -316,10 +316,16 @@ def pregunta_11():
         "g": 35,
     }
 
-
     """
-    return
+    columnas = [(y[1],y[3].split(',')) for y in datos]
+    dic = {}
+    for tupla in columnas:
+        for letra in tupla[1]:
+            dic[letra] = dic.get(letra,0) + int(tupla[0])
 
+    return {llave:dic[llave] for llave in sorted(dic.keys())}
+
+#print(pregunta_11())
 
 def pregunta_12():
     """
