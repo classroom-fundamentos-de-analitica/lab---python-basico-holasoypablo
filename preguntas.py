@@ -259,8 +259,18 @@ def pregunta_09():
     }
 
     """
-    return
+    diccionario = []
+    for i in [y[4].split(",") for y in datos]:
+        for j in i:
+            diccionario.append(j)
+    diccionario = sorted([y.split(":") for y in diccionario])
+    dic = {}
+    for tupla in diccionario:
+        dic[tupla[0]] = dic.get(tupla[0],0) + 1
 
+    return dic
+
+#print(pregunta_09())
 
 def pregunta_10():
     """
@@ -278,8 +288,8 @@ def pregunta_10():
         ("E", 3, 3),
     ]
 
-
     """
+    
     return
 
 
