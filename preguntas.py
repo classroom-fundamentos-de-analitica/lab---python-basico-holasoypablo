@@ -122,8 +122,8 @@ def pregunta_05():
     for tupla in columnas:
         if(tupla[0] not in [y[0] for y in lista]):
             letra = tupla[0]
-            maximo = max([y[1] for y in columnas if y[0] == letra])
-            minimo = min([y[1] for y in columnas if y[0] == letra])
+            maximo = max([int(y[1]) for y in columnas if y[0] == letra])
+            minimo = min([int(y[1]) for y in columnas if y[0] == letra])
             lista.append((letra,maximo,minimo))
 
     return sorted(lista)
