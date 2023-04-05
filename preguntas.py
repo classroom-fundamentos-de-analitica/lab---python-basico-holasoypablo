@@ -237,7 +237,7 @@ def pregunta_08():
 
     return sorted(lista)
 
-print(pregunta_08())
+#print(pregunta_08())
 
 def pregunta_09():
     """
