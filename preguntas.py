@@ -289,9 +289,16 @@ def pregunta_10():
     ]
 
     """
+    columnas = [[y[0],y[3],y[4]] for y in datos]
+    for i in columnas:
+        i[1] = i[1].split(',')
+        i[2] = i[2].split(',')
     
-    return
+    lista = [(y[0],len(y[1]),len(y[2])) for y in columnas]
 
+    return lista
+
+#print(pregunta_10())
 
 def pregunta_11():
     """
