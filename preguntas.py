@@ -152,10 +152,23 @@ def pregunta_06():
     ]
 
     """
+    diccionario = []
+    for i in [y[4].split(",") for y in datos]:
+        for j in i:
+            diccionario.append(j)
+    diccionario = [y.split(":") for y in diccionario]
 
-    
-    return
+    respuesta = []
+    for tupla in diccionario:
+        if tupla[0] not in [y[0] for y in respuesta]:
+            clave = tupla[0]
+            minimo = min([int(y[1]) for y in diccionario if y[0] == clave])
+            maximo = max([int(y[1]) for y in diccionario if y[0] == clave])
+            respuesta.append((clave,minimo,maximo))
 
+    return sorted(respuesta)
+
+#print(pregunta_06())
 
 def pregunta_07():
     """
