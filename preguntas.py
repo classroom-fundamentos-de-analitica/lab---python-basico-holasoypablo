@@ -95,8 +95,12 @@ def pregunta_04():
     ]
 
     """
-    return
+    ocurrencias = [y[1] for y in [y.split('-') for y in [y[2] for y in datos]]]
+    contador = Counter(ocurrencias).most_common()
 
+    return sorted(contador)
+
+#print(pregunta_04())
 
 def pregunta_05():
     """
