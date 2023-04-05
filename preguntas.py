@@ -191,8 +191,17 @@ def pregunta_07():
     ]
 
     """
-    return
+    columnas = [(y[1],y[0]) for y in datos]
+    lista = []
+    for tupla in columnas:
+        if int(tupla[0]) not in [int(y[0]) for y in lista]:
+            numero = int(tupla[0])
+            letras = [letra for letra in [y[1] for y in columnas if int(y[0]) == numero]]
+            lista.append((numero,letras))
 
+    return sorted(lista)
+
+#print(pregunta_07())
 
 def pregunta_08():
     """
