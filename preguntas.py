@@ -11,7 +11,12 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+from collections import Counter
 
+print("Hecho por Juan Pablo Buitrago Diaz CC 1000.206.552")
+datos = open('data.csv','r').readlines()
+datos = [y.replace("\n","") for y in datos]  
+datos = [y.split("\t") for y in datos]
 
 def pregunta_01():
     """
@@ -21,8 +26,9 @@ def pregunta_01():
     214
 
     """
-    return
+    return sum([int(x[1]) for x in datos])
 
+#print(pregunta_01())
 
 def pregunta_02():
     """
@@ -39,8 +45,9 @@ def pregunta_02():
     ]
 
     """
-    return
+    return sorted(Counter([str(x[0]) for x in datos]).most_common(5), key=lambda tupla: tupla[0])
 
+#print(pregunta_02())
 
 def pregunta_03():
     """
@@ -57,8 +64,14 @@ def pregunta_03():
     ]
 
     """
-    return
+    suma = {} 
+    for letra, numero in list(zip([x[0] for x in datos],[x[1] for x in datos])):
+        suma[letra] = suma.get(letra,0) + int(numero)
+    lista = sorted([(key,value) for key,value in suma.items()],key=lambda tupla: tupla)
 
+    return lista
+
+#print(pregunta_03())
 
 def pregunta_04():
     """
@@ -82,8 +95,12 @@ def pregunta_04():
     ]
 
     """
-    return
+    ocurrencias = [y[1] for y in [y.split('-') for y in [y[2] for y in datos]]]
+    contador = Counter(ocurrencias).most_common()
 
+    return sorted(contador)
+
+#print(pregunta_04())
 
 def pregunta_05():
     """
@@ -100,8 +117,18 @@ def pregunta_05():
     ]
 
     """
-    return
+    columnas = [(y[0],y[1]) for y in datos]
+    lista = []
+    for tupla in columnas:
+        if(tupla[0] not in [y[0] for y in lista]):
+            letra = tupla[0]
+            maximo = max([int(y[1]) for y in columnas if y[0] == letra])
+            minimo = min([int(y[1]) for y in columnas if y[0] == letra])
+            lista.append((letra,maximo,minimo))
 
+    return sorted(lista)
+
+#print(pregunta_05())
 
 def pregunta_06():
     """
@@ -125,8 +152,23 @@ def pregunta_06():
     ]
 
     """
-    return
+    diccionario = []
+    for i in [y[4].split(",") for y in datos]:
+        for j in i:
+            diccionario.append(j)
+    diccionario = [y.split(":") for y in diccionario]
 
+    respuesta = []
+    for tupla in diccionario:
+        if tupla[0] not in [y[0] for y in respuesta]:
+            clave = tupla[0]
+            minimo = min([int(y[1]) for y in diccionario if y[0] == clave])
+            maximo = max([int(y[1]) for y in diccionario if y[0] == clave])
+            respuesta.append((clave,minimo,maximo))
+
+    return sorted(respuesta)
+
+#print(pregunta_06())
 
 def pregunta_07():
     """
@@ -149,8 +191,17 @@ def pregunta_07():
     ]
 
     """
-    return
+    columnas = [(y[1],y[0]) for y in datos]
+    lista = []
+    for tupla in columnas:
+        if int(tupla[0]) not in [int(y[0]) for y in lista]:
+            numero = int(tupla[0])
+            letras = [letra for letra in [y[1] for y in columnas if int(y[0]) == numero]]
+            lista.append((numero,letras))
 
+    return sorted(lista)
+
+#print(pregunta_07())
 
 def pregunta_08():
     """
@@ -174,8 +225,19 @@ def pregunta_08():
     ]
 
     """
-    return
+    columnas = [(y[1],y[0]) for y in datos]
+    lista = []
+    for tupla in columnas:
+        if int(tupla[0]) not in [int(y[0]) for y in lista]:
+            numero = int(tupla[0])
+            letras = [letra for letra in [y[1] for y in columnas if int(y[0]) == numero]]
+            letras = sorted(list(set(letras)))
 
+            lista.append((numero,letras))
+
+    return sorted(lista)
+
+#print(pregunta_08())
 
 def pregunta_09():
     """
@@ -197,8 +259,18 @@ def pregunta_09():
     }
 
     """
-    return
+    diccionario = []
+    for i in [y[4].split(",") for y in datos]:
+        for j in i:
+            diccionario.append(j)
+    diccionario = sorted([y.split(":") for y in diccionario])
+    dic = {}
+    for tupla in diccionario:
+        dic[tupla[0]] = dic.get(tupla[0],0) + 1
 
+    return dic
+
+#print(pregunta_09())
 
 def pregunta_10():
     """
@@ -216,10 +288,17 @@ def pregunta_10():
         ("E", 3, 3),
     ]
 
-
     """
-    return
+    columnas = [[y[0],y[3],y[4]] for y in datos]
+    for i in columnas:
+        i[1] = i[1].split(',')
+        i[2] = i[2].split(',')
+    
+    lista = [(y[0],len(y[1]),len(y[2])) for y in columnas]
 
+    return lista
+
+#print(pregunta_10())
 
 def pregunta_11():
     """
@@ -237,10 +316,16 @@ def pregunta_11():
         "g": 35,
     }
 
-
     """
-    return
+    columnas = [(y[1],y[3].split(',')) for y in datos]
+    dic = {}
+    for tupla in columnas:
+        for letra in tupla[1]:
+            dic[letra] = dic.get(letra,0) + int(tupla[0])
 
+    return {llave:dic[llave] for llave in sorted(dic.keys())}
+
+#print(pregunta_11())
 
 def pregunta_12():
     """
@@ -257,4 +342,12 @@ def pregunta_12():
     }
 
     """
-    return
+    columnas = [[y[0],y[4].split(',')] for y in datos]
+    dic = {}
+    for tupla in columnas:
+        for elemento in tupla[1]:
+            dic[tupla[0]] = dic.get(tupla[0],0) + int(elemento.split(':')[1])
+
+    return {llave:dic[llave] for llave in sorted(dic.keys())}
+
+#print(pregunta_12())
